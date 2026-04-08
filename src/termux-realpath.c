@@ -6,7 +6,7 @@
 #include <sys/syscall.h>
 #include <unistd.h>
 
-__attribute__((visibility("default"))) char *_Nullable realpath(const char *_Nonnull path, char *_Nullable resolved) {
+__attribute__((visibility("default"))) char *realpath(const char *path, char *resolved) {
   char *(*orig_realpath)(const char *, char *);
   orig_realpath = dlsym(RTLD_NEXT, "realpath");
 

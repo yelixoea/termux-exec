@@ -76,7 +76,11 @@ __attribute__((visibility("default"))) int execvpe(const char *name, char *const
     size_t name_len = strlen(name);
 
     char buf[dir_len + 1 + name_len + 1];
-    mempcpy(mempcpy(mempcpy(buf, dir, dir_len), "/", 1), name, name_len + 1);
+    char *p = buf;
+    memcpy(p, dir, dir_len);
+    p += dir_len;
+    *p++ = '/';
+    memcpy(p, name, name_len + 1);
 
     execve(buf, argv, envp);
     switch (errno) {
